@@ -5,7 +5,7 @@
         <div class="d-sm-flex align-items-sm-center">
 
           <button class="btn {{$class}}">{{$text}}</button>
-          <span id="msgs" class="ml-2"></span>
+          <span id="msgs" class="ml-2">{{session('success') == 1 ?'操作成功':''}}</span>
         </div>
         
         

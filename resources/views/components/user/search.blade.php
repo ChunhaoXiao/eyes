@@ -1,5 +1,5 @@
 <div class="container mb-4">
-    <form class="">
+    <form class="" id="search_form">
         <div class="row">
             <div class="col-sm">
             <x-formtext text="手机号" name="phone" :value="request()->phone??''"/>
@@ -96,13 +96,28 @@
         </div>
         <div class="row">
             <div class="col-sm">
-            <x-select label="是否关注公众号" name="following" id="following" :options="[0 => '全部', 1 => '已关注', 2 => '未关注']" :selected="request()->following??0"/>
+                <x-select label="是否关注公众号" name="following" id="following" :options="[0 => '全部', 1 => '已关注', 2 => '未关注']" :selected="request()->following??0"/>
+            </div>
+            <div class="col-sm">
+                <x-select label="性别" name="sex" :options="[1 => '男', 2 => '女']" :selected="request()->sex??''"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+               <x-checkbox :options="App\Models\Customer::HASDATA" name="has[]" :checked="request()->has??[]"/>
+            </div>
+        </div>
+       
+
+        <div class="row">
+            <div class="col-sm">
+                <x-formtext text="备注" name="contenct" :value="request()->contenct??''"/>
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
                 <button class="btn btn-primary" type="submit">搜索</button>
-                <button class="btn btn-info" name="excel" value="1">导出excel</button>
+                <button class="btn btn-info" type="button" name="excel" id="export_excel">导出excel</button>
                 <a href="{{route('admin.users.index')}}" class="btn btn-info">清空搜索条件</a>
                 
             </div>
@@ -110,3 +125,18 @@
     </form >
    
 </div>
+
+<script>
+ $("#export_excel").on('click', function() {
+    const data = $("#search_form").serialize();
+    //alert(data)
+    location.href = "{{route('admin.customers.export')}}?"+data;
+    // $.ajax({
+    //     url:"{{route('admin.customers.export')}}",
+    //     data:data,
+    //     success:res => {
+    //         location.href = "{{route('admin.customers.export')}}"
+    //     }
+    // })
+ });
+</script>

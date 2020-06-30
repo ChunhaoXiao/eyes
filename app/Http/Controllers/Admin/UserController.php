@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 use App\Services\SearchService;
 use App\Exports\CustomerExport;
 use Exception;
+use Box\Spout\Writer\Style\StyleBuilder;
+
+use Rap2hpoutre\FastExcel\FastExcel;
+use Illuminate\Support\Facades\Cookie;
+
 
 class UserController extends Controller
 {
@@ -17,20 +22,25 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, SearchService $SearchService)
+    public function index(Request $request)
     {
         $datas = $request->all();
+        $search = new SearchService($datas);
+
         if(!empty($datas['excel'])) {
-           //dd($SearchService->search($datas)->get());
-            return (new CustomerExport($datas))->download(time().'.xlsx');
-           
+
+            //return new(CustomerExport())->download();
+            //$style = (new StyleBuilder())->setShouldWrapText(true)->build();
+            //return (new FastExcel($search->excel()))->headerStyle($style)->download(time().'.xlsx');
         }
-        else 
-        {
-            $users = $SearchService->search($request->all());
-            return view('admin.users.index', ['datas' => $users]);
-        }
-        
+
+        //dump($search->getTotalConsume());
+        $perpage = Cookie::get('perpage')??20;
+        $users = $search->getCustomerList($perpage);
+       
+        return view('admin.users.index', [
+            'datas' => $users, 
+        ]); 
     }
 
     /**
@@ -97,5 +107,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function usersGenerator() {
+        foreach (Customer::orderBy('id')->cursor() as $user) {
+            yield ['姓名' => $user->name, '性别' => $user->sex];
+        }
+       
     }
 }

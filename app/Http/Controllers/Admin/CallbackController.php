@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Http\Requests\CallbackRequest;
+use App\Models\Callback;
 
 class CallbackController extends Controller
 {
@@ -82,8 +83,9 @@ class CallbackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Callback $callback)
     {
-        //
+        $callback->delete();
+        return response()->json(['status' =>0]);
     }
 }

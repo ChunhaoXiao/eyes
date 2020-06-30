@@ -1,13 +1,13 @@
-
-<h3>{{$title}}</h3>
-<div class="container">
+<x-section-title title="病史"></x-section-title>
+<div class="container pt-2">
     <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
-    <x-textinput  text="主诉" name="zs" col="col-sm-2" :value="$data->zs??''"/>
-    <x-textinput text="既往史" name="jws1" col="col-sm-2" :value="$data->jws1??''"/>
-    <x-textinput name="jzs" text="家族史" col="col-sm-2" :value="$data->jzs??''"/>
+    <x-formtext  text="主诉" name="zs" labelcol="1" :value="$data->zs??''"/>
+    <x-formtext  text="既往史" name="jws1" labelcol="1" :value="$data->jws1??''"/>
+    <x-formtext  name="jzs" text="家族史" labelcol="1" :value="$data->jzs??''"/>
 
-    <x-checkbox text="视力" :options="App\Models\History::EYE_DISEASE" name="jws[]" :checked="$data->jws??[]"/>
-    <x-text-input name="gms" text="过敏史" :value="$data->gms??''"/>
+    <x-checkbox text="视力" :options="App\Models\History::EYE_DISEASE" name="jws[]" :checked="$data->jws??[]" labelcol="1"/>
+
+    <x-formtext name="gms" text="过敏史" :value="$data->gms??''" labelcol="1"/>
 
     <div class="row form-group">
         <div class="col-sm-1"></div>
@@ -42,8 +42,8 @@
         <x-inline-input label="左眼" name="left_eye" type="number" :value="$data->left_eye??''"/>
         </div>
     </div>
-    <x-textinput text="最近一次配镜时间" name="pjsj" type="date" :value="$data->pjsj??''"/>
-    <x-textinput text="以为采用的矫治方法" name="ywff" :value="$data->ywff??''"/>
+    <x-formtext text="最近一次配镜时间" name="pjsj" type="date" :value="$data->pjsj??''" labelcol="2"/>
+    <x-formtext text="以为采用的矫治方法" name="ywff" :value="$data->ywff??''" labelcol="2"/>
 </div>
 
 

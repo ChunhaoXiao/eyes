@@ -17,6 +17,10 @@ class Consume extends Model
 
         'apptime', 'create_time', 'update_time'
     ];
+
+    protected $appends = [
+        'add_date'
+    ];
     public function customer () {
         return $this->belongsTo(Customer::class, 'userid');
     }
@@ -31,5 +35,9 @@ class Consume extends Model
 
     public function product() {
         return $this->belongsTo(Category::class, 'product_type_id');
+    }
+
+    public function getAddDateAttribute() {
+        return $this->apptime->toDateString();
     }
 }

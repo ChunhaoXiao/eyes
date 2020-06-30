@@ -14,11 +14,11 @@
             <x-formtext  text="消费时间" name="apptime" type="date"/>
             <x-formtext text="消费金额" name="price" type="number"/>
             
-            <x-select labelcol="2" name="shopid" id="shopids" label="医院" source="shop"/>
+            <x-select labelcol="2" name="shopid" id="shopids" label="医院" source="shop" style="width: 200px;"/>
             <x-select labelcol="2" style="width:200px" name="comsumption_type_id" id="consumption_type_id" label="消费类型" source="consumption"/>
             <x-select labelcol="2" style="width:200px" name="product_type_id" id="product_type_id" label="商品类型" source="prod"/>
             <x-textinput text="消费备注" name="content" type="text"/>
-            
+            <input type="hidden" value="0" name="id">
         </form>
        
         <!-- <textarea  id="callback_content" rows="6" class="form-control"></textarea> -->
@@ -36,12 +36,13 @@
   $("#consume_submit").on('click', function() {
     
     const data = $("#consume_form").serialize()
-   
+    const id = $("#consume_form").find("input[name='id']").val();
+   const user = "{{$user->id}}"
     $.ajax({
       
-      url:"{{ route('admin.consume.store', $user) }}",
+      url: id > 0 ? "/admin/consume/"+id : "/admin/"+user+"/consume",
       data:data,
-      type:'post',
+      type:id > 0 ? 'put' : 'post',
       success:res => {
         console.log(res)
         $("#consume_form input").val('')

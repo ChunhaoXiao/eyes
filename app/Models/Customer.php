@@ -24,6 +24,16 @@ class Customer extends Model
         'records' => '复查记录',
         'comments' => '医生备注',
     ];
+
+    const HASDATA = [
+        'aplastic' => '角膜接触数据',
+        'dryeye' => '干眼症数据',
+        'myopias' => '近视治疗数据',
+        'layzyeyes' => '斜弱视康数据',
+        'records' => '复查记录数据',
+        'comments' => '医生备注数据',
+    ];
+
     protected $guarded = [];
     protected $table = 'ya_customer';
 
@@ -90,6 +100,29 @@ class Customer extends Model
         return now()->diffInYears($this->birth_day) + 1;
     }
 
+    public function getFollowingStatusAttribute() {
+        return $this->following == 1? '<b>已关注公众号</b>' : '';
+    }
+
+    public function getJgradeAttribute() {
+        $str = $this->jie? $this->jie.' 届 ' : '';
+        $str .= $this->grade? $this->grade.' 班' :'';
+        return $str? '('.$str.')' : '';
+        
+    }
+
+    public function getCustomerInfoAttribute() {
+        $str = '';
+        $str .= "<p>店铺：".$this->shop->title??''."</p>";
+        $str .= "<p>初诊日期：".$this->go_date."</p>";
+        $str .= "<p>修改日期：".$this->modified_date??''."</p>";
+        $str .= "<p>信息来源：".$this->src->name??$this->data_src."</p>";
+        $str .= "<p>治疗卡：".$this->card_cure->name??''."</p>";
+        $str .= "<p>备注：".$this->contenct."</p>";
+        $str .= "<p>".$this->following_status."</p>";
+        return $str;
+    }
+
     public function history() {
         return $this->hasOne(History::class, 'user_id');
     }
@@ -148,7 +181,14 @@ class Customer extends Model
     }
 
     public function src() {
-        return $this->belongsTo(Category::class, 'data_src');
+        return $this->belongsTo(Category::class, 'data_src')->withDefault();
+    }
+
+    public function card() { #就诊卡
+        return $this->hasOne(Card::class, 'customerid');
+    }
+    public function cardinfo() {
+        return $this->hasMany(CardInfo::class, 'customerid');
     }
 
     public function card_cure() {
@@ -181,13 +221,13 @@ class Customer extends Model
             return $query;
         }
         $fields = [
-            'phone', 'name', 'school', 'card_t', 'card_d', 'shopid', 'level', 'data_src', 'following'
+            'phone', 'name', 'school', 'card_t', 'card_d', 'shopid', 'level', 'data_src', 'following','sex', 'contenct'
         ];
         foreach($data as $k => $v) {
             if(in_array($k, $fields)) {
                 if(!empty($v)) {
-                    if($k == 'name') {
-                        $query->where('name', 'like', '%'.$v.'%');
+                    if(in_array($k, ['name', 'contenct'])) {
+                        $query->where($k, 'like', '%'.$v.'%');
                     }
                     elseif($k =='following') {
                         if($v == 1) {
@@ -197,9 +237,24 @@ class Customer extends Model
                             $query->where('following', 0);
                         }
                     }
+                    elseif($k == 'shopid') {
+                        $query->where("ya_customer.shopid", $v);
+                    }
+                    
                     else {
                         $query->where($k, $v);
                     }
+                }
+            }
+        }
+
+        if(!empty($data['has'])) {
+            
+           
+            foreach($data['has'] as $v) {
+                if(in_array($v, array_keys(self::HASDATA))) {
+                    
+                    $query->whereHas($v);
                 }
             }
         }
@@ -299,4 +354,23 @@ class Customer extends Model
             $query->whereBetween('create_time', $between);
         });
     }
+
+    public function scopeHasdata($query, $data) {
+        return $query->whereHas($data);
+    }
+
+    public function getData() {
+        //$this->名字 = $this->name;
+       // $this->备注 = $this->contenct;
+        //$this->学校 = $this->schoolobj->name??'';
+        //$this->店铺 = $this->shop->title??'';
+        $this->call_backs = $this->lastcall->content??'';
+        $this->froms = $this->src->name??'';
+       // unset($this->name);
+       // unset($this->school);
+        //unset($this->shopid); 
+        return $this;
+    }
+
+    
 }

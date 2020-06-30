@@ -1,5 +1,5 @@
-<div>
-    <h4>{{$title}}</h4>
+<div class="container">
+    <h3 class="pb-2">{{$title}}</h3>
     <div class="container">
       <x-formtext name="name"  :value="$user->name??''" labelcol="1" text="姓名"/>
       <x-radio col="1"  text="性别" :options="[1 => '男', 2 => '女']" name="sex" :checked="$user->sex??1"/>

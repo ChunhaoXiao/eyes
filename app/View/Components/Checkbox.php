@@ -19,12 +19,15 @@ class Checkbox extends Component
 
     public $src;
 
-    public function __construct($options = [], $checked = [], $src = '', $text = '')
+    public $labelcol;
+
+    public function __construct($options = [], $checked = [], $src = '', $text = '', $labelcol='')
     {
         $this->options = $options;
         $this->checked = $checked;
         $this->text = $text;
         $this->src = $src;
+        $this->labelcol = $labelcol;
     }
 
     public function isChecked($v) {

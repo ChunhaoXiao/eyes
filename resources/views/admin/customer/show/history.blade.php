@@ -2,7 +2,6 @@
 
 @section('form')
    <div class="container">
-        <h3>既往史</h3>
         <x-history.jiwangshi-show :data="$user->history"/>
         <x-history.diet-show :data="$user->history" />
         <x-history.usage-show :data="$user->history"/> 

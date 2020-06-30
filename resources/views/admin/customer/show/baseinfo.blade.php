@@ -1,6 +1,6 @@
 @extends('admin.customerlayout')
 @section('form')
-<h3>基本信息</h3>
+<x-section-title title="基本信息"/>
 <div class="container">
     <x-display-item label="姓名" :data="$user->name??''"/>
     <x-display-item label="性别" :data="$user->sex==1?'男':'女'"/>
@@ -22,14 +22,13 @@
     <x-display-item label="干眼卡类型" :data="$user->card_dryeye->name??'无'"/>
     <x-display-item label="所属分店" :data="$user->shop->title"/>
     <x-display-item label="备注" :data="$user->contenct??''"/>
+    <x-display-item label="最后修改时间" :data="$user->update_time??''"/>
 </div>
-<a class="mb-2 mt-2 mr-2 btn-transition btn btn-outline-focus" href="{{ route('admin.customer.edit', ['customer' => $user->id, 'section' => 'baseinfo']) }}">编辑</a>
-<h3 class="mt-4">回访记录</h3>
-<div class="container">
-  <x-customer.call-back :data="$user->callbacks()->latest()->take(4)->get()->reverse()"/>
-</div>
-
-<x-customer.consume :data="$user->consumes()->with(['shop','consume_type', 'product'])->latest()->take(5)->get()"/>
+<a class="m-3  btn-transition btn btn-outline-info" href="{{ route('admin.customer.edit', ['customer' => $user->id, 'section' => 'baseinfo']) }}">编辑</a>
+<!--回访记录-->
+<x-customer.call-back :data="$user->callbacks()->latest()->take(4)->get()->reverse()"/>
+<!--消费记录-->  
+<x-customer.consume :data="$user->consumes()->with(['shop','consume_type', 'product'])->latest()->take(10)->get()"/>
 @endsection
 <x-customer.callmodal :user="$user"/>
 <x-customer.consume-modal :user="$user" />

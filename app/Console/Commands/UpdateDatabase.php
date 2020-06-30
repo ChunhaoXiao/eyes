@@ -9,6 +9,8 @@ use App\Models\Optician;
 use App\Models\Check;
 use App\Models\Customer;
 use App\Models\Aplastic;
+use App\Models\Myopia;
+use App\Models\Comment;
 
 class UpdateDatabase extends Command
 {
@@ -108,84 +110,112 @@ class UpdateDatabase extends Command
         //     }
         // });
 
-        Aplastic::orderBy('id')->chunk(200, function($datas) {
-            $bmzk = [
-                'jmfc_bmzk_zc' => '1', 
-                'jmfc_bmzk_hh' => '2', 
-                'jmfc_bmzk_wr' => '3',
-                'jmfc_bmzk_ps' => '4'
-            ];
+        // Aplastic::orderBy('id')->chunk(200, function($datas) {
+        //     $bmzk = [
+        //         'jmfc_bmzk_zc' => '1', 
+        //         'jmfc_bmzk_hh' => '2', 
+        //         'jmfc_bmzk_wr' => '3',
+        //         'jmfc_bmzk_ps' => '4'
+        //     ];
 
-            $byzk = [
-                'jmfc_byzk_zc' => '1',
-                'jmfc_byzk_qk' => '2',
-            ];
+        //     $byzk = [
+        //         'jmfc_byzk_zc' => '1',
+        //         'jmfc_byzk_qk' => '2',
+        //     ];
 
-            $chuzhi = [
-                'jmfc_cz_zc' => '1',
-                'jmfc_cz_dm' => '2',
-                'jmfc_cz_cw' => '3',
-                'jmfc_cz_hp' => '4',
-                'jmfc_cz_tp' => '5'
-            ];
+        //     $chuzhi = [
+        //         'jmfc_cz_zc' => '1',
+        //         'jmfc_cz_dm' => '2',
+        //         'jmfc_cz_cw' => '3',
+        //         'jmfc_cz_hp' => '4',
+        //         'jmfc_cz_tp' => '5'
+        //     ];
 
-            $zhusu = [
-                'yhzs_zc' => '1',
-                'yhzs_cy' => '2',
-                'yhzs_ywg' => '3',
-                'yhzs_slbd' => '4',
-                'yhzs_jpnz' => '5',
-                'yhzs_xy' => '6',
-                'yhzs_yh' => '7',
-                'yhzs_yt' => '8',
-                'yhzs_fmwzd' => '9',
-                'yhzs_slbj' => '10',
-            ];
+        //     $zhusu = [
+        //         'yhzs_zc' => '1',
+        //         'yhzs_cy' => '2',
+        //         'yhzs_ywg' => '3',
+        //         'yhzs_slbd' => '4',
+        //         'yhzs_jpnz' => '5',
+        //         'yhzs_xy' => '6',
+        //         'yhzs_yh' => '7',
+        //         'yhzs_yt' => '8',
+        //         'yhzs_fmwzd' => '9',
+        //         'yhzs_slbj' => '10',
+        //     ];
 
-            foreach($datas as $v) {
-                $bmzk_r = $bmzk_l = $chuzhi_r = $chuzhi_l = $byzk_r = $byzk_l = $zs = [];
-                foreach($bmzk as $k => $v1) {
-                    if(!empty($v->{$k.'_r'}))
-                    {
-                        $bmzk_r[] = $v1;
+        //     foreach($datas as $v) {
+        //         $bmzk_r = $bmzk_l = $chuzhi_r = $chuzhi_l = $byzk_r = $byzk_l = $zs = [];
+        //         foreach($bmzk as $k => $v1) {
+        //             if(!empty($v->{$k.'_r'}))
+        //             {
+        //                 $bmzk_r[] = $v1;
+        //             }
+        //             if(!empty($v->{$k.'_l'})) {
+        //                 $bmzk_l[] = $v1;
+        //             }
+        //         }
+        //         foreach($zhusu as $k => $v1) {
+        //             if(!empty($v->{$k})) {
+        //                 $zs[] = $v1;
+        //             }
+        //         }
+        //         foreach($chuzhi as $k => $v1) {
+        //             if(!empty($v->{$k.'_r'})) {
+        //                 $chuzhi_r[] = $v1;
+        //             }
+        //             if(!empty($v->{$k.'_l'})) {
+        //                 $chuzhi_l[] = $v1;
+        //             }
+        //         }
+        //         foreach($byzk as $k => $v1) {
+        //             if(!empty($v->{$k.'_r'})) {
+        //                 $byzk_r[] = $v1;
+        //             }
+        //             if(!empty($v->{$k.'_l'})) {
+        //                 $byzk_l[] = $v1;
+        //             }
+        //         }
+        //         $v->update([
+
+        //             'bmzk_l' => $bmzk_l,
+        //             'bmzk_r' => $bmzk_r,
+        //             'chuzhi_l' => $chuzhi_l,
+        //             'chuzhi_r' => $chuzhi_r,
+        //             'byzk_r' => $byzk_r,
+        //             'byzk_l' => $byzk_l,
+        //             'zhusu' => $zs
+        //         ]);
+        //     }
+        // });
+
+            Myopia::chunk(200, function($datas) {
+                
+                foreach($datas as $v) {
+                    // if($v->kx_date_end) {
+                    //     if(!$this->isValidDate($v->kx_date_end)) {
+                    //         echo 'invalid date';
+                            
+                    //     }
+                    // }
+                    if($v->kx_date_end=='0000-00-00') {
+                        //echo $v->kx_date_end."\r\n";
+                        $v->update(['kx_date_end' => NUll]);
                     }
-                    if(!empty($v->{$k.'_l'})) {
-                        $bmzk_l[] = $v1;
+
+                    if($v->kx_date_start == '0000-00-00') {
+                        $v->update(['kx_date_start' => NULL]);
                     }
                 }
-                foreach($zhusu as $k => $v1) {
-                    if(!empty($v->{$k})) {
-                        $zs[] = $v1;
-                    }
-                }
-                foreach($chuzhi as $k => $v1) {
-                    if(!empty($v->{$k.'_r'})) {
-                        $chuzhi_r[] = $v1;
-                    }
-                    if(!empty($v->{$k.'_l'})) {
-                        $chuzhi_l[] = $v1;
-                    }
-                }
-                foreach($byzk as $k => $v1) {
-                    if(!empty($v->{$k.'_r'})) {
-                        $byzk_r[] = $v1;
-                    }
-                    if(!empty($v->{$k.'_l'})) {
-                        $byzk_l[] = $v1;
-                    }
-                }
-                $v->update([
+            });
 
-                    'bmzk_l' => $bmzk_l,
-                    'bmzk_r' => $bmzk_r,
-                    'chuzhi_l' => $chuzhi_l,
-                    'chuzhi_r' => $chuzhi_r,
-                    'byzk_r' => $byzk_r,
-                    'byzk_l' => $byzk_l,
-                    'zhusu' => $zs
-                ]);
-            }
-        });
+            Comment::chunk(200, function($datas) {
+                foreach($datas as $v) {
+                    if($v->c_date == '0000-00-00') {
+                        $v->update(['c_date' => NULL]);
+                    }
+                }
+            });
         
     }
 

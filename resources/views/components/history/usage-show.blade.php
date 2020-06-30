@@ -1,4 +1,4 @@
-<h3>用眼习惯</h3>
+<x-section-title title="用眼习惯"></x-section-title>
 <div class="container">
   <x-display-item label="每晚学习用眼时间" :data="!empty($data->night_study_time)?$data->night_study_time.'小时':''"/>
   <x-display-item label="两次用眼时间间隔" :data="!empty($data->use_eye_two_time)?$data->use_eye_two_time.'分钟':''"/>

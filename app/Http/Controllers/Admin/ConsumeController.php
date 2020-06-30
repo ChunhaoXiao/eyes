@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Http\Requests\ConsumeRequest;
+use App\Models\Consume;
 
 class ConsumeController extends Controller
 {
@@ -37,7 +38,7 @@ class ConsumeController extends Controller
      */
     public function store(ConsumeRequest $request, Customer $customer)
     {
-        $customer->consumes()->create($request->all());
+        $customer->consumes()->create($request->except('id'));
         return response()->json(['status' => 0, 'msg' => '添加成功']);
     }
 
@@ -49,7 +50,8 @@ class ConsumeController extends Controller
      */
     public function show($id)
     {
-        //
+        $consume = Consume::find($id);
+        return $consume;
     }
 
     /**
@@ -70,9 +72,10 @@ class ConsumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ConsumeRequest $request, Consume $consume)
     {
-        //
+        $consume->update($request->except('id'));
+        return response()->json(['status' => 0, 'msg' => '添加成功']);
     }
 
     /**
@@ -81,8 +84,9 @@ class ConsumeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Consume $consume)
     {
-        //
+        $consume->delete();
+        return response()->json(['status' => 0]);
     }
 }

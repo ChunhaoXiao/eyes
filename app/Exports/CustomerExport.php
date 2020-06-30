@@ -15,7 +15,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Exports\Sheets\PerfivekSheets;
 
-class CustomerExport implements FromQuery, WithMapping, WithHeadings
+class CustomerExport implements WithMapping, WithHeadings, FromCollection
 {
     use Exportable;
     /**
@@ -23,23 +23,43 @@ class CustomerExport implements FromQuery, WithMapping, WithHeadings
     */
     // public function collection()
     // {
-    //     return Customer::latest()->paginate(20);
+    //     return Customer::latest()->take(5000)->get();
     // }
+
+    public $data;
+    public $service;
 
     public function __construct($data)
     {
        // dd($data);
         //$this->data = [];
         $this->data = $data;
+        $this->service = new SearchService($data);
+        //$this->service = new SearchService($data);
     }
 
-
-    public function query()
+    public function collection()
     {
-        $service = new SearchService;
-        //return Customer::query();
-        return $service->search($this->data);
+        //return Customer::latest()->take(5000)->get();
+        return $this->service->query->get();
+        
     }
+
+    // public function query() {
+    //     $service = new SearchService($this->data);
+    //     return $service->query->limit(1000);
+    // }
+
+    
+
+
+    // public function query()
+    // {
+    //     //$service = new SearchService;
+    //     //return Customer::query();
+    //     //return $service->search($this->data);
+    //     return Customer::latest()->take(1000);
+    // }
 
     public function map($customer):array
     {
@@ -56,8 +76,9 @@ class CustomerExport implements FromQuery, WithMapping, WithHeadings
             $customer->contenct??'',
             $customer->lastcall->content??'',
             $customer->go_date??'',
-            $customer->src->name??$customer->data_src,
+            $customer->src->name??$customer->data_src??'',
             $customer->card_cure->name??'',
+
             $customer->last_optician_data->zhujing_l??'',
             $customer->last_optician_data->qiujing_l??'',
             $customer->last_optician_data->guangzhou_l??'',
@@ -67,23 +88,10 @@ class CustomerExport implements FromQuery, WithMapping, WithHeadings
             $customer->last_optician_data->add_date??'',
             $customer->last_optician_data->jjbrand->name??'',
             $customer->last_optician_data->total_price??'',
+
             $customer->shop->title??'',
-
-
-
-           // $invoice->invoice_number,
-           // $invoice->user->name,
-            //Date::dateTimeToExcel($invoice->created_at),
         ];
 
-        // if(($customer->optician_datas->isNotEmpty())) {
-        //     //dd($customer->optician_datas);
-        //     foreach($customer->optician_datas as $v) {
-        //         $row[] = array_merge($data, [$v->jingpian_brand, $v->total_price]);
-        //     }
-        //     return $row;
-        // }
-        //$data = array_merge($data, ['', '']);
         return  $data;
     }
 

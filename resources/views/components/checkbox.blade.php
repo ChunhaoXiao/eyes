@@ -1,6 +1,8 @@
-<div class="position-relative form-group row">
-    <label for="" class="col-auto col-form-label">{{ $text }}</label>
 
+<div class="position-relative form-group row">
+    @if(!empty($text))
+    <label for="" class="{{empty($labelcol)? 'col-sm-auto':'col-sm-'.$labelcol}} col-form-label">{{ $text }}</label>
+    @endif
     <div class="col-sm-auto align-self-center">
 
         @foreach($setopt as $k => $v)

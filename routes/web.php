@@ -38,8 +38,12 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
     Route::put('/customer/{customer}/{section?}', 'CustomerController@update')->name('admin.customer.update')->middleware('input.set');//更新
 
     Route::post('/{customer?}/callback/', 'CallbackController@store')->name('admin.callback.store');
-    Route::delete('/callback/{id}', 'CallbackController@destroy')->name('admin.callback.destroy');
+    Route::delete('/callback/{callback}', 'CallbackController@destroy')->name('admin.callback.destroy');
     Route::post('/{customer?}/consume', 'ConsumeController@store')->name('admin.consume.store');
+
+    Route::get('/consume/{id}', 'ConsumeController@show')->name('admin.consume.show');
+    Route::put('/consume/{consume}', 'ConsumeController@update')->name("admin.consume.update");
+    Route::delete('/consume/{consume}', 'ConsumeController@destroy')->name('admin.consume.destroy');
 
     Route::resource('user.prescribe', 'CustomerPrescribeController');
     Route::resource('user.aplasticdata', 'CustomerOrderController');
@@ -61,7 +65,7 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
 
     Route::get('shopdoctor/{shop?}', 'ShopDoctorController@index')->name('admin.shopdoctor');
 
-    Route::get('exp', 'ExportController@index');
+    Route::get('exp', 'ExportController@index')->name('admin.customers.export');
 
     Route::get('/qrcode', 'WechatQrcodeController@show');
 
@@ -76,6 +80,15 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
 
     Route::resource('setting/banner', 'BannerController');
     
-    
+    Route::get('/success', 'SuccessController@index')->name('admin.success');
+    Route::post('/setperpage', 'SetPerpageController')->name('admin.perpage');
+
+    Route::get('qrcode/{user}', 'MedicalCardController@show')->name('qrcode.show');
+
+    Route::resource('/{user}/medicalcard', 'MedicalCardController');
+
+    Route::get('/totalconsume', 'TotalConsumeController')->name('admin.totalconsume');
+
+    Route::resource('/customeritem', 'CustomerItemController');
     //Route::resource('')
 });
