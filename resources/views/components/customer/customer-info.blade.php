@@ -15,7 +15,7 @@
           <x-inputgroup label="" unit="班" type="number" name="grade" :value="$user->grade??''"/>
         </div>
       </div>
-      <x-formtext labelcol="1" text="手机" type="number" name="phone" :value="$user->phone??''"/>
+      <x-formtext labelcol="1" text="手机" type="number" name="phone" :value="$user->fake_phone??''"/>
       <x-formtext labelcol="1" text="初诊日期" name="go_date" :value="$user->go_date??''" type="date"/>  
       <x-formtext labelcol="1" text="修改日期" name="modified_date" :value="$user->modified_date??''" type="date"/>
       <x-select label="信息来源" labelcol="1" name="data_src" id="source" source="src" :selected="$user->data_src??''" />

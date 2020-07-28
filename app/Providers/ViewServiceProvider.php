@@ -43,7 +43,8 @@ class ViewServiceProvider extends ServiceProvider
             if(!empty($section)) {
                 $datas = CustomerItem::where('identity', $section)->with('items.items')->first();
                 $group = [];
-                $datas->items->map(function($item) use(&$group){
+                if(!empty($datas->items)) {
+                    $datas->items->map(function($item) use(&$group){
                     $group[$item->identity] = $item->name;
                     if($item->items) {
                         $item->items->map(function($data) use(&$group){
@@ -51,6 +52,8 @@ class ViewServiceProvider extends ServiceProvider
                         });
                     }
                 });
+                }
+                
                 $view->with('text', $group);
             }
             unset($group);

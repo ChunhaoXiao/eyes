@@ -90,5 +90,7 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
     Route::get('/totalconsume', 'TotalConsumeController')->name('admin.totalconsume');
 
     Route::resource('/customeritem', 'CustomerItemController');
+    
+    Route::post('/logout', 'AuthController@destroy')->name('admin.logout');
     //Route::resource('')
 });

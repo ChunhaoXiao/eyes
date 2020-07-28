@@ -46,9 +46,9 @@
             @foreach($datas as $v)
                 <tr>
                     <td>{{ $v->id }}</td>
-                    <td>{{ $v->username }}</td>
+                    <td>{{ $v->fake_phone }}</td>
                     <td>{{ $v->nickname }}</td>
-                    <td>{{ $v->mobile }}</td>
+                    <td>{{ $v->fake_phone }}</td>
                     <td></td>
 
                     <td>{{ $v->status == 1 ? '正常' : '禁用'}}</td>

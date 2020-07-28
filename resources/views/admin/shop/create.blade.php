@@ -23,7 +23,7 @@
         <x-radio text="状态" :options="['1' => '正常', '0' => '禁用']" col="1" name="status" :checked="$data->status??1"/>
         <x-formtext text="排序" labelcol="1" name="orderid" :value="$data->orderid??0"/>
             @isset($data) @method('PUT') @endisset
-        <x-submitbutton />
+        <x-submitbutton text="啊" classname="btn-success"/>
     </form>
     <x-errmsg/>
 @endsection

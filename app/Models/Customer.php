@@ -371,6 +371,10 @@ class Customer extends Model
         //unset($this->shopid); 
         return $this;
     }
+    
+    public function getFakePhoneAttribute($v) {
+        return substr($this->phone, 0,6).'*****';
+    }
 
     
 }

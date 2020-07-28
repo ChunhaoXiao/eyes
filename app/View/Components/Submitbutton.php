@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class submitbutton extends Component
+class Submitbutton extends Component
 {
     /**
      * Create a new component instance.
@@ -12,13 +12,13 @@ class submitbutton extends Component
      * @return void
      */
 
-    public $class;
+    public $classname;
     public $text;
 
-    public function __construct($text = '提交', $class = 'btn-secondary')
+    public function __construct($text = '提交', $classname = 'btn-secondary')
     {
-        $this->text = $text;
-        $this->class = $class;
+        //$this->text = $text;
+        $this->classname = $classname;
     }
 
     /**

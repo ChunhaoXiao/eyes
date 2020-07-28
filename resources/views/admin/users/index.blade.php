@@ -59,7 +59,7 @@
                             <td>{{ $v->sex == 1?'男':'女' }}</td>
                             <td>@if($v->age) {{ $v->age }}岁 @else - @endif </td>
                             <td><a href="javascript:;" @if($v->jie) data-toggle="popover" data-content="{{$v->Jgrade}}" data-placement="right" data-container="body" data-trigger="hover" @endif>{{ $v->schoolobj->name??$v->school }}</a></td>
-                            <td>{{ $v->phone }}</td>
+                            <td>{{ $v->fake_phone }}</td>
                             <td>{{ $v->level == 1 ?'一般会员' : '特殊会员'}}</td>
                             <td>{{ $v->total_consumes['total_consumes']? $v->total_consumes['total_consumes'].'元':'-' }}</td>
                             <td><a href="{{route('medicalcard.create', ['user' => $v->id])}}">就诊卡</a></td>

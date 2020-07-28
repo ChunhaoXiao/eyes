@@ -2,12 +2,12 @@
 @section('nav') 添加/编辑 管理员 @endsection
 @section('content')
     <form action="{{isset($data) ? route('manager.update', $data): route('manager.store')}}" method="post">
-        <x-formtext text="用户名" labelcol="1" name="username" :value="$data->username??''"/>
+        <x-formtext text="用户名" labelcol="1" name="username" :value="$data->fake_phone??''"/>
         <x-formtext text="密码" labelcol="1" name="password" type="password"/>
 
         <x-formtext text="确认密码" labelcol="1" name="password_confirmation" type="password"/>
         <x-formtext text="昵称" labelcol="1" name="nickname" :value="$data->nickname??''"/>
-        <x-formtext text="手机号" labelcol="1" name="mobile" :value="$data->mobile??''"/>
+        <x-formtext text="手机号" labelcol="1" name="mobile" :value="$data->fake_phone??''"/>
         <div class="form-group row">
             <label for="" class="col-sm-1">默认头像</label>
             <div class="col-sm-auto d-flex">

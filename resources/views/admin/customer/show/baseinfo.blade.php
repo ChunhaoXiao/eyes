@@ -13,7 +13,7 @@
         </div>
     </x-display-item>
 
-    <x-display-item label="手机" :data="$user->phone??''"/>
+    <x-display-item label="手机" :data="$user->fake_phone??''"/>
     <x-display-item label="初诊日期" :data="$user->go_date??''"/>
     <x-display-item label="会员类型" :data="$user->level == 1? '一般会员':'特殊会员'"/>
     <x-display-item label="修改日期" :data="$user->modified_date??''"/>

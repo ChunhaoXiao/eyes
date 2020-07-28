@@ -113,6 +113,10 @@ return [
         'url' => 'doctors',
     ],
     [
+        'text' => '页面文字',
+        'url' => 'customeritem',
+    ],
+    [
         'text' => '系统设置',
         'prefix' => 'setting',
         'submenus' => [

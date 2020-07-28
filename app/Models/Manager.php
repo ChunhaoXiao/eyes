@@ -38,6 +38,10 @@ class Manager extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class, 'group_id');
     }
+    
+    public function getFakePhoneAttribute() {
+        return substr($this->mobile,0, 6).'***';
+    }
 
     // public function actions() {
     //     return $this->hasManyThrough(RoleAction::class, )
