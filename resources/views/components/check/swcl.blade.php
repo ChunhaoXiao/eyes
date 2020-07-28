@@ -1,4 +1,5 @@
-<h3>生物测量</h3>
+<x-section-title title="生物测量"/>
+
 <div class="container">
     @foreach(App\Models\Check::SWCL as $k => $v)
     <div class="row">

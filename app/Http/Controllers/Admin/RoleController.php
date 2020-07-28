@@ -9,6 +9,10 @@ use App\Http\Requests\RoleSaveRequest;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,6 +65,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        //dump($role->actions);
         return view('admin.role.create', ['data' => $role]);
     }
 
@@ -74,6 +79,8 @@ class RoleController extends Controller
     public function update(RoleSaveRequest $request, Role $role)
     {
         $role->update($request->except('auth'));
+
+        //dd($request->auth);
         $role->attachActions($request->auth);
         return redirect()->route('roles.index');
     }
@@ -84,8 +91,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return response()->json(['status' => 0]);
     }
 }

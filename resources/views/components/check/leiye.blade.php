@@ -1,4 +1,5 @@
-<h3>泪液</h3>
+<x-section-title title="泪液"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>泪液量</b></div>

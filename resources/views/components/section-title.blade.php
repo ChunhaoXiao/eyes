@@ -1,4 +1,4 @@
-<div class="container pt-3">
+<div class="container pt-3 pb-2">
 <div class="row align-items-center  no-gutters">
     <div class="col-sm-auto">
         <h3>{{$title}}</h3>

@@ -13,8 +13,8 @@
         @else
         <x-display-item :label="$v">
         <div class="row">
-            <div class="col-sm-2">右眼：{{$data->{$k.'_r'}??''}}</div>
-            <div class="col-sm-2">左眼：{{$data->{$k.'_l'}??''}}</div>
+            <div class="col-sm-auto">右眼：{{$data->{$k.'_r'}??''}}</div>
+            <div class="col-sm-auto">左眼：{{$data->{$k.'_l'}??''}}</div>
         
         </div>
         </x-display-item>

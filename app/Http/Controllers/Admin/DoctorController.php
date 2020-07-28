@@ -9,6 +9,11 @@ use App\Http\Requests\DoctorRequest;
 
 class DoctorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Doctor::class);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -4,8 +4,8 @@
     @foreach($datas as $v) 
 
         @if(empty($v->type) || $v->type == 'section')
-            <div class="row">
-              <div class="col-sm bg-secondary text-white font-bold">
+            <div class="row mb-2">
+              <div class="col-sm font-weight-bold">
                   <div class="d-flex align-items-center">
                       <div> {{$v->name}}</div>
                       <a href="javascript:void(0);" class="nav-link">
@@ -13,16 +13,13 @@
                         
                     </a>
                   </div>
-               
-
-                
               </div>
               
               <div class="col-sm"></div>
               <div class="col-sm">
                 <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">前台显示该区块</label>
+                    <input type="checkbox" class="custom-control-input" id="{{$v->identity}}" {{$v->disabled == 0 ? 'checked':''}} data-id="{{$v->id}}">
+                    <label class="custom-control-label" for="{{$v->identity}}">前台显示该区块</label>
                 </div>
               </div>
             </div>
@@ -41,8 +38,8 @@
                     <div class="col-sm">{{$v1->identity}}</div>
                     <div class="col-s">
                         <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">前台显示该字段</label>
+                        <input type="checkbox" class="custom-control-input" id="{{$v1->identity}}" {{$v1->disabled == 0?'checked' :''}} data-id="{{$v1->id}}">
+                        <label class="custom-control-label" for="{{$v1->identity}}">前台显示该字段</label>
                         </div>
                     </div>
 
@@ -59,6 +56,25 @@
 
     <script>
       $(function() {
+
+            $(".custom-control-label").on('click', function(e){
+              const id = $(this).prev().data('id');
+              const checked = $(this).prev().prop('checked') == true? 1 : 0;
+
+             // alert(id)
+             console.log(checked)
+              $.ajax({
+                url:"/admin/customeritem/"+id,
+                data:{
+                  disabled:checked
+                },
+                type:'put',
+                success:res => {
+                  console.log(res);
+                }
+              })
+              
+            })
        
             $('.fa-edit').not(this).popover('hide');
             $(document).on('click', "button.ml-1", function(e) {

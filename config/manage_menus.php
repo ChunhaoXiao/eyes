@@ -35,6 +35,11 @@ return [
         'url' => 'users',
     ],
     [
+        'text' => '回访记录',
+        'url' => 'callback',
+        'hidden' => 1,
+    ],
+    [
         'text' => '项目管理',
         'prefix' => 'project',
         'submenus' => [
@@ -113,6 +118,10 @@ return [
         'url' => 'doctors',
     ],
     [
+        'text' => '页面文字',
+        'url' => 'customeritem',
+    ],
+    [
         'text' => '系统设置',
         'prefix' => 'setting',
         'submenus' => [
@@ -123,19 +132,44 @@ return [
             ],
             [
                 'text' => '网站导航',
-                'url' => '',
+                'url' => 'nav/nav',
                 'model' => '',
             ],
             [
                 'text' => '首页中间导航',
-                'url' => '',
+                'url' => 'navzh/nav',
                 'model' => '',
             ],
             [
                 'text' => '底部导航',
-                'url' => '',
+                'url' => 'navdi/nav',
                 'model' => '',
+            ],
+            [
+                'text' => '产品管理',
+                'url' => 'product',
+                
+            ],
+            [
+                'text' => '资讯管理',
+                'url' => 'news'
             ]
         ]
     ],
+
+    [
+        'text' => '公众号',
+        'prefix' => 'wechat',
+        'submenus' => [
+            [
+                'text' => '菜单管理',
+                'url' => 'menus',
+                //'model' => App\Models\Banner::class,
+            ],
+            [
+                'text' => '模板消息',
+                'url' => 'message',
+            ]
+        ]    
+    ]
 ];

@@ -1,4 +1,5 @@
-<h3>双眼视功能</h3>
+<x-section-title title="双眼视功能"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm">

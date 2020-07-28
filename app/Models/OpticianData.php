@@ -14,6 +14,10 @@ class OpticianData extends Model
 
     protected $guarded = [];
 
+    // protected $attributes = [
+    //     'dixiang_r' => ''
+    // ];
+
     protected $dates = [
 
         'create_time', 'update_time',

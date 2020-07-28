@@ -36,6 +36,7 @@
                             <ul class="vertical-nav-menu metismenu">
 
                                 @foreach(config('manage_menus') as $v)
+                                    @if(empty($v['hidden']))
                                     <li>
                                         @if(isset($v['submenus']))
                                             <a href="javascript:;">
@@ -59,10 +60,11 @@
                                         </li>
                                         @endif
                                     </li>
+                                    @endif
                                 @endforeach
-                                
+                            </ul> 
 
-                                <li class="app-sidebar__heading">Dashboards</li>
+                                <!-- <li class="app-sidebar__heading">Dashboards</li>
 
                                 <li>
                                 <a href="#">
@@ -303,7 +305,7 @@
                                         Upgrade to PRO
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px; height: 429px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 272px;"></div></div></div>
                 </div>

@@ -26,12 +26,17 @@ class Customer extends Model
     ];
 
     const HASDATA = [
-        'aplastic' => '角膜接触数据',
-        'dryeye' => '干眼症数据',
-        'myopias' => '近视治疗数据',
-        'layzyeyes' => '斜弱视康数据',
-        'records' => '复查记录数据',
-        'comments' => '医生备注数据',
+        'aplastic' => '有『角膜接触』数据',
+        'dryeye' => '有『干眼症』数据',
+        'myopias' => '有『近视治疗』数据',
+        'layzyeyes' => '有『斜弱视康』数据',
+        'records' => '有『复查记录』数据',
+        'comments' => '有『医生备注』数据',
+        'check' => '有『眼科检查』数据',
+        'handle' => '有『诊断处置』数据',
+        'optician' => '有『验光配镜』数据',
+        'chufang' => '有『验光配镜处方』数据',
+        'order' => '有『角膜接触订单』数据',
     ];
 
     protected $guarded = [];
@@ -249,12 +254,18 @@ class Customer extends Model
         }
 
         if(!empty($data['has'])) {
-            
-           
             foreach($data['has'] as $v) {
                 if(in_array($v, array_keys(self::HASDATA))) {
+                    if($v == 'chufang') {
+                        $query->whereHas('optician_datas');
+                    }
+                    elseif($v == 'order') {
+                        $query->whereHas('aplastic_datas');
+                    }
+                    else {
+                        $query->whereHas($v);
+                    }
                     
-                    $query->whereHas($v);
                 }
             }
         }
@@ -299,10 +310,20 @@ class Customer extends Model
 
     //按诊断
     public function scopeDisease($query, $data) {
-        return $query->whereHas('handle', function($query) use($data){
-            $query->where("all_types", 'like', '%'.$data.'%');
-           // $query->whereRaw("', '+ all_types like %,$data,%");
-        });
+        
+        if(!empty(array_filter($data))) {
+            foreach($data as $v) {
+                $query = $query->whereHas('handle', function($query) use($v){
+                    $query->where("all_types", "like", '%'.$v.'%');
+                });
+            }
+            return $query;
+        }
+
+        // return $query->whereHas('handle', function($query) use($data){
+        //     $query->where("all_types", 'like', '%'.$data.'%');
+        //    // $query->whereRaw("', '+ all_types like %,$data,%");
+        // });
     }
 
     //消费区间查询
@@ -356,6 +377,12 @@ class Customer extends Model
     }
 
     public function scopeHasdata($query, $data) {
+        if($data == 'chufang') {
+            return $query->whereHas('optician_datas');
+        }
+        if($data == 'order') {
+            return $query->whereHas('aplastic_data');
+        }
         return $query->whereHas($data);
     }
 
@@ -370,6 +397,10 @@ class Customer extends Model
        // unset($this->school);
         //unset($this->shopid); 
         return $this;
+    }
+
+    public static function  login($code) {
+        $customer = self::firstOrCreate(['openid' => $code]);
     }
 
     

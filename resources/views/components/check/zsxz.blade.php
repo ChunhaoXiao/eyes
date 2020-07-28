@@ -1,6 +1,7 @@
-<h3>注视性质</h3>
+<x-section-title title="注视性质"/>
+
 <div class="container">
-    <div class="row">
+    <div class="row no-gutters">
         <div class="col-sm-atuo col-form-label">
             <b>右眼</b>
         </div>
@@ -10,7 +11,7 @@
         </div>
         @endforeach
     </div>
-    <div class="row">
+    <div class="row no-gutters">
         <div class="col-sm-atuo col-form-label">
             <b>左眼</b>
         </div>

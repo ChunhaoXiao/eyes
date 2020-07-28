@@ -13,7 +13,7 @@
             </select>
           </div>
         </div>
-        <x-formtext text="预约时间" name="apptime" type="date" labelcol=1 :value="$data->apptime->toDateString()??''"/>
+        <x-formtext text="预约时间" name="apptime" type="date" labelcol=1 :value="isset($data)?$data->apptime->toDateString():''"/>
         <x-formtext text="排序" name="orderid" type="number" labelcol=1 :value="$data->orderid??0"/>
         
         <x-radio text="状态" :options="['1' => '正常', '0' => '禁用']" col="1" name="status" :checked="$data->checked??1"/>

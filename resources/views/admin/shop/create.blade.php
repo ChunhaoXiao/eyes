@@ -7,7 +7,7 @@
         <div class="row form-group">
             <label for="" class="col-sm-1">分店图片</label>
             <div class="col-sm">
-            <x-uploadfile id="shoppicture" picname="picurl"  :uploadUrl="route('admin.upload')" title="上传图片" textname="shopimage"/>
+            <x-uploadfile id="shoppicture" field="picurl"  :uploadUrl="route('admin.upload')" title="上传图片"  singlepic="1" :pictures="$data->picurl??[]"/>
             </div>
         </div>
         <x-formtext text="分店地址" labelcol="1" name="address" :value="$data->address??''"/>
@@ -15,7 +15,7 @@
         <div class="row form-group">
             <label for="" class="col-sm-1">二维码</label>
             <div class="col-sm">
-            <x-uploadfile id="picurl1" picname="picurl1"  :uploadUrl="route('admin.upload')" title="上传图片" textname="shopimage"/>
+            <x-uploadfile id="picurl1" field="picurl1"  :uploadUrl="route('admin.upload')" title="上传图片"  singlepic="1" :pictures="$data->picurl1??[]"/>
             </div>
         </div>
         <x-textarea text="描述" labelcol="1" name="intro" :default="$data->intro??''"/>

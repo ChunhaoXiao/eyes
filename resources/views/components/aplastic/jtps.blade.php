@@ -1,7 +1,7 @@
-<h3>配适测试 静态配适</h3>
+<x-section-title title="配适测试 静态配适"/>
 <div class="container">
     <div class="row">
-        <label for="" class="col-sm-auto col-form-label">基弧</label>
+        <label for="" class="col-sm-1 col-form-label">基弧</label>
         <div class="col-sm">
             <x-textinput text="OD" name="spcs_jh_od" :value="$data->spcs_jh_od??''"/>
         </div>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row">
-        <label for="" class="col-sm-auto col-form-label">反转弧</label>
+        <label for="" class="col-sm-1 col-form-label">反转弧</label>
         <div class="col-sm">
             <x-textinput text="OD" name="spcs_fzh_od" :value="$data->spcs_fzh_od??''"/>
         </div>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <label for="" class="col-sm-auto col-form-label">配适弧</label>
+        <label for="" class="col-sm-1 col-form-label">配适弧</label>
         <div class="col-sm">
             <x-textinput text="OD" name="spcs_sph_od" :value="$data->spcs_sph_od??''"/>
         </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <label for="" class="col-sm-auto col-form-label">戴镜视力</label>
+        <label for="" class="col-sm-1 col-form-label">戴镜视力</label>
         <div class="col-sm">
             <x-textinput text="OD" name="spcs_djsl_od" :value="$data->spcs_djsl_od??''"/>
         </div>

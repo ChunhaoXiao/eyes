@@ -1,4 +1,5 @@
-<h3>其他检查</h3>
+<x-section-title title="其它检查"/>
+
 <div class="container">
     <div class="row">
     <div class="col">

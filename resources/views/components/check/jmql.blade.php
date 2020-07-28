@@ -1,5 +1,5 @@
+<x-section-title title="角膜曲率"/>
 
-<h3>角膜曲率</h3>
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>右眼</b></div>

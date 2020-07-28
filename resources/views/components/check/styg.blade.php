@@ -1,4 +1,5 @@
-<h3>散瞳眼光</h3>
+<x-section-title title="散瞳验光"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>小孔视力</b></div>

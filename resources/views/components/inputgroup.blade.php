@@ -1,7 +1,7 @@
-@props(['unit', 'label'])
-<div class="row form-group">
+@props(['unit', 'label', 'col'])
+<div class="row form-group no-gutters">
     @if(!empty($label))
-      <label for="" class="col-sm-auto col-form-label">{{ $label??'' }}</label>
+      <label for="" class="{{!empty($col)?'col-sm-'.$col:'col-sm-auto'}} col-form-label mr-1">{{ $label??'' }}</label>
     @endif
     <div class="col-sm">
         <div class="input-group">

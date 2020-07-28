@@ -12,6 +12,7 @@ class SearchService {
         'corneal', 
         'jingjia', 
         'jingpian', 
+        'disease',
     ];
 
     public $query;

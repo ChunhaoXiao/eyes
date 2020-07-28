@@ -1,4 +1,5 @@
-<h3>眼位</h3>
+<x-section-title title="眼位"/>
+
 <div class="container">
   <div class="row">
     <div class="col-sm-2 col-form-label"></div>

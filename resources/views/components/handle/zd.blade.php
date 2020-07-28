@@ -1,4 +1,5 @@
-<h3>诊断</h3>
+<x-section-title title="诊断"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-4">

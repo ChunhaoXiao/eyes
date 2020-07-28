@@ -17,11 +17,14 @@
     <x-check.jmdxt :data="$user->check"/>
     <x-check.swcl :data="$user->check"/>
     <x-check.other :data="$user->check"/>
+
+    <x-uploadfile id="maps" textname="1" title="地形图" field="map"  singlepic="0" :pictures="$user->check->map['path']??[]" :description="$user->check->map['text']??[]"/>
+
+    <x-uploadfile id="yandi"  textname="1" field="yandi" title="眼底" :pictures="$user->check->yandi['path']??[]" :description="$user->check->yandi['text']??[]" singlepic="0"/>
+
+    <x-uploadfile id="shengwu"  textname="1" field="shengwu" title="生物测量" :pictures="$user->check->shengwu['path']??[]" :description="$user->check->shengwu['text']??[]" singlepic="0"/>
     
-    <x-uploadfile id="maps" picname="map[path][]" textname="map[text][]" title="地形图" field="map" :data="$user->check->map??[]"/>
-    <x-uploadfile id="yandi" picname="yandi[path][]" textname="yandi[text][]" field="yandi" title="眼底" :data="$user->check->yandi??[]"/>
-    <x-uploadfile id="shengwu" picname="shengwu[path][]" textname="shengwu[text][]" field="shengwu" title="生物测量" :data="$user->check->shengwu??[]"/>
-    <x-uploadfile id="fuzhen" picname="fuzhen[path][]" textname="fuzhen[text][]" field="fuzhen" title="复诊" :data="$user->check->fuzhen??[]"/>
+    <x-uploadfile id="fuzhen"  textname="1" field="fuzhen" title="复诊" :pictures="$user->check->fuzhen['path']??[]" :description="$user->check->fuzhen['text']??[]" singlepic="0"/>
     @method('PUT')
     <x-submitbutton class="btn-primary"/>
 </form>

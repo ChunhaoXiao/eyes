@@ -54,9 +54,14 @@ class CustomerMyopiaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $table = $request->query('table');
+
+        if($table == 'myopia') {
+            return Myopia::find($id);
+        }
+        return Layzyeye::find($id);
     }
 
     /**
@@ -79,7 +84,10 @@ class CustomerMyopiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $table = $request->query('table');
+        $model = $table == 'myopia' ? Myopia::find($id): Layzyeye::find($id);
+        $model->update($request->except('id', 'table'));
+        return response()->json(['status' => 0]);
     }
 
     /**
@@ -100,4 +108,6 @@ class CustomerMyopiaController extends Controller
         }
         return response()->json(['status' => 0]);
     }
+
+ 
 }

@@ -37,7 +37,7 @@ class CustomerCommentController extends Controller
      */
     public function store(Request $request, Customer $user)
     {
-        $user->comments()->create($request->input());
+        $user->comments()->create($request->except('id'));
         return response()->json(['status' => 0]);
     }
 
@@ -49,7 +49,7 @@ class CustomerCommentController extends Controller
      */
     public function show($id)
     {
-        //
+        return Comment::find($id);
     }
 
     /**
@@ -72,7 +72,8 @@ class CustomerCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Comment::find($id)->update($request->except('id'));
+        return response()->json(['status' => 0]);
     }
 
     /**

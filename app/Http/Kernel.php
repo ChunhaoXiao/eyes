@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
         'input.set' => \App\Http\Middleware\SetInputData::class,
         'brand.type' => \App\Http\Middleware\SetDefaultTypeForUrls::class,
         'category.type' => \App\Http\Middleware\ValidateCategoryType::class,
+        'navpos' => \App\Http\Middleware\SetDefaultNavPos::class,
+        "checkopenid" => \App\Http\Middleware\CheckOpenid::class,
     ];
 }

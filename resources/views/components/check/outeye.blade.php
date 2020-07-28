@@ -1,4 +1,4 @@
-<h3>外眼</h3>
+<x-section-title title="外眼"/>
 <div class="container">
     
   <div class="row">

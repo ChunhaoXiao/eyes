@@ -9,6 +9,10 @@
     <script>
         $("#create_comment").on('click', function(e) {
             $("#add_comment").modal()
+            alert('aaa');
+            const date = "{{now()->toDateString()}}";
+            alert(date)
+            $("input[name=c_date]").val(date)
         })
     </script>
 @endsection

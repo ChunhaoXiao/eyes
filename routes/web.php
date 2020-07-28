@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+    Route::get('/', 'IndexController@index')->middleware('checkopenid');
+
 
 
 Route::get('admin/login', 'Admin\AuthController@create')->name('admin.showlogin');
 Route::post('admin/login', 'Admin\AuthController@store')->name('admin.login');
 
 Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(function() {
+    Route::post("/logout", 'AuthController@destroy')->name('admin.logout');
     Route::get('/', 'IndexController@index')->name('admin.index');
     Route::resource('/table', 'ModelTableController');
     Route::resource('/tables.groups', 'FieldGroupController');
@@ -45,8 +50,8 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
     Route::put('/consume/{consume}', 'ConsumeController@update')->name("admin.consume.update");
     Route::delete('/consume/{consume}', 'ConsumeController@destroy')->name('admin.consume.destroy');
 
-    Route::resource('user.prescribe', 'CustomerPrescribeController');
-    Route::resource('user.aplasticdata', 'CustomerOrderController');
+    Route::resource('user.prescribe', 'CustomerPrescribeController')->shallow();
+    Route::resource('user.aplasticdata', 'CustomerOrderController')->shallow();
 
     Route::put('/plan/{user}/update', 'DryeyePlanController@update')->name('plan.update');
 
@@ -67,7 +72,7 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
 
     Route::get('exp', 'ExportController@index')->name('admin.customers.export');
 
-    Route::get('/qrcode', 'WechatQrcodeController@show');
+    Route::get('/qrcode', 'WeatQrcodeController@show');
 
     Route::resource('project/{type}/brand', 'BrandController')->middleware('brand.type');
     Route::resource('project/school', 'SchoolController');
@@ -79,6 +84,7 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
     Route::resource('doctors', 'DoctorController');
 
     Route::resource('setting/banner', 'BannerController');
+    Route::resource('setting/{pos}/nav', 'NavController')->middleware('navpos');
     
     Route::get('/success', 'SuccessController@index')->name('admin.success');
     Route::post('/setperpage', 'SetPerpageController')->name('admin.perpage');
@@ -90,5 +96,16 @@ Route::namespace('Admin')->prefix('admin')->middleware('auth:admin')->group(func
     Route::get('/totalconsume', 'TotalConsumeController')->name('admin.totalconsume');
 
     Route::resource('/customeritem', 'CustomerItemController');
-    //Route::resource('')
+
+
+
+
+    Route::get('/analystic', 'AnalysticsController@index')->name('analystic.index');
+
+    Route::get('/password', 'PasswordController@edit')->name('password.edit');
+    Route::put('/password', 'PasswordController@update')->name('password.update');
+    Route::resource('setting/product', 'ProductController');
+    Route::resource('setting/news', 'NewsController');
+
+    Route::resource('wechat/message','InfoMessageController');
 });

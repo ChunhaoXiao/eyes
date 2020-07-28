@@ -1,8 +1,8 @@
-<h3>试戴片参数</h3>
+<x-section-title title="试戴片参数"/>
 <div class="container">
-    <div class="row form-group">
+    <div class="row form-group no-gutters">
         <label class="col-sm-auto col-form-label">
-            OD
+            <span class="font-weight-bold mr-1">OD </span>
         </label>
         <div class="col-sm">
           <x-textinput text="镜片编码" name="sdpgjl_sdcs_jpbm" :value="$data->sdpgjl_sdcs_jpbm??''"/>
@@ -21,9 +21,9 @@
         </div>
     </div>
 
-    <div class="row form-group">
+    <div class="row form-group no-gutters">
         <label class="col-sm-auto col-form-label">
-            OS
+            <span class="font-weight-bold mr-1">OS</span>
         </label>
         <div class="col-sm">
           <x-textinput text="镜片编码" name="sdpgjl_os_sdcs_jpbm" :value="$data->sdpgjl_os_sdcs_jpbm??''"/>

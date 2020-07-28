@@ -34,7 +34,7 @@
             <x-select label="干眼卡类型" labelcol="4" name="card_d" id="card_d" source="card1" :selected="request()->card_d"/>
             </div>
             <div class="col-sm">
-            <x-select label="诊断" name="disease" id="disease" source="disease" multiple /> 
+            <x-select label="诊断" name="disease[]" id="disease" source="disease" multiple :selected="request()->disease"/> 
             </div>
             <div class="col-sm">
             <x-select label="所属店面" name="shopid" id="shop_id" source="shop" :selected="request()->shopid"/> 
@@ -107,6 +107,7 @@
                <x-checkbox :options="App\Models\Customer::HASDATA" name="has[]" :checked="request()->has??[]"/>
             </div>
         </div>
+        
        
 
         <div class="row">

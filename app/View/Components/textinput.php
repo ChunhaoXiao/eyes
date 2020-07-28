@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class textinput extends Component
+class Textinput extends Component
 {
     /**
      * Create a new component instance.
@@ -15,7 +15,7 @@ class textinput extends Component
 
     public $labelcol;
     
-    public function __construct($text, $labelcol = 'col-sm-2')
+    public function __construct($text, $labelcol = 'col-sm-auto')
     {
         $this->text = $text;
         $this->labelcol = $labelcol;

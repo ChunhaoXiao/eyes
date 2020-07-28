@@ -8,6 +8,11 @@ use App\Models\CustomerItem;
 
 class CustomerItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(CustomerItem::class, 'customeritem');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -47,11 +52,9 @@ class CustomerItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CustomerItem $customeritem)
     {
-        $row = CustomerItem::find($id);
-        $datas = $row->items()->with('items')->get();
-        //dump($datas);
+        $datas = $customeritem->items()->with('items')->get();
         return view('admin.customeritem.show', ['datas' => $datas]);
     }
 
@@ -73,11 +76,17 @@ class CustomerItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CustomerItem $customeritem)
     {
-        if(!empty($request->name)) {
-            $data = CustomerItem::find($id);
-            $data->update(['name' => $request->name]);
+        
+        $input = array_filter($request->only(['name', 'disabled']), 'strlen');
+
+        
+        if(!empty($input)) {
+            // $data = CustomerItem::find($id);
+            // $data->update($input);
+            $customeritem->update($input);
+            
         }
         return response()->json(['status' => 0]);
     }

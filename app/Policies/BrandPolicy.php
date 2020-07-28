@@ -11,6 +11,14 @@ class BrandPolicy
 {
     use HandlesAuthorization;
 
+    public function before(Manager $manager, $pos)
+    {
+        if($manager->role->id == 1)
+        {
+            return true;
+        }
+            
+    }
     /**
      * Create a new policy instance.
      *
@@ -35,7 +43,7 @@ class BrandPolicy
     }
 
     private function cando($manager, $type, $action) {
-        $action = 'brand-'.$type.'-'.$action;
+        $action = $type.'/brand-'.$action;
         return $manager->role->actions->contains('action', $action);
     }
 }

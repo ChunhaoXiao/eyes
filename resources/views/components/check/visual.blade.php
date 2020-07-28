@@ -1,4 +1,4 @@
-<h3>视力</h3>
+<x-section-title title="视力"/>
 <div class="container">
     
   <div class="row">

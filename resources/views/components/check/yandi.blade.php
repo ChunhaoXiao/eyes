@@ -1,4 +1,5 @@
-<h3>眼底</h3>
+<x-section-title title="眼底"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>血管</b></div>

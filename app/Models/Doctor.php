@@ -26,4 +26,8 @@ class Doctor extends Model
     public function appointments() {
         return $this->hasMany(Appointment::class, 'doctor');
     }
+
+    public function scopeIndex($query) {
+        return $query->where([['status', 1], ['indexstatus', 1]])->latest('orderid')->limit(4);
+    }
 }

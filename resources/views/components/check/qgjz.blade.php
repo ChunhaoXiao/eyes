@@ -1,4 +1,5 @@
-<h3>屈光间质</h3>
+<x-section-title title="屈光间质"/>
+
 <div class="container">
     @foreach(App\Models\Check::QGJZ as $k => $v)
       @if(is_array($v))

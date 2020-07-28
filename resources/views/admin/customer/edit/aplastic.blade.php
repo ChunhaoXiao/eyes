@@ -4,8 +4,8 @@
     <x-aplastic.sdp :data="$user->aplastic"/>
     <x-aplastic.dtps :data="$user->aplastic"/>
     <x-aplastic.jtps :data="$user->aplastic"/>
-    <x-aplastic.ypjl :data="$user->aplastic"/>
-    <x-aplastic.jpjl :data="$user->aplastic"/>
+    <x-aplastic.ypjl :data="$user->aplastic" />
+    <x-aplastic.jpjl :data="$user->aplastic" :user="$user"/>
     <x-aplastic.zhusu :data="$user->aplastic"/>
     <x-aplastic.ybfc :data="$user->aplastic"/>
     <x-aplastic.jpfc :data="$user->aplastic"/>
