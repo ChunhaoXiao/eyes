@@ -1,5 +1,5 @@
+<x-section-title title="同视机"/>
 
-<h3>同视机</h3>
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>同时视</b></div>

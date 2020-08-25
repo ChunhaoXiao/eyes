@@ -10,6 +10,14 @@ class SchoolPolicy
 {
     use HandlesAuthorization;
 
+    public function before(Manager $manager, $pos)
+    {
+        if($manager->role->id == 1)
+        {
+            return true;
+        }
+            
+    }
     /**
      * Determine whether the user can view any schools.
      *
@@ -28,9 +36,9 @@ class SchoolPolicy
      * @param  \App\School  $school
      * @return mixed
      */
-    public function view(User $user, School $school)
+    public function view(Manager $manager)
     {
-        //
+        return $manager->role->actions->contains('action', 'school-index');
     }
 
     /**
@@ -41,7 +49,7 @@ class SchoolPolicy
      */
     public function create(Manager $manager)
     {
-        return $manager->role->actions->contains('action', 'create-school');
+        return $manager->role->actions->contains('action', 'school-store');
     }
 
     /**
@@ -51,9 +59,9 @@ class SchoolPolicy
      * @param  \App\School  $school
      * @return mixed
      */
-    public function update(User $user, School $school)
+    public function update(Manager $manager)
     {
-        //
+        return $manager->role->actions->contains('action', 'school-update');
     }
 
     /**
@@ -63,9 +71,9 @@ class SchoolPolicy
      * @param  \App\School  $school
      * @return mixed
      */
-    public function delete(User $user, School $school)
+    public function delete(Manager $manager)
     {
-        //
+        return $manager->role->actions->contains('action', 'school-delete');
     }
 
     /**

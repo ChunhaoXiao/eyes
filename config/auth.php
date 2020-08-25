@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'ya_customer',
         ],
 
         'api' => [
@@ -71,9 +71,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'ya_customer' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => 'App\Models\Customer',
         ],
 
         'managers' => [

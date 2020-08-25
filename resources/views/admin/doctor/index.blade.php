@@ -19,7 +19,7 @@
                 <tr>
                     
                     <td>{{ $v->title }}</td>
-                    <td><img src="{{ asset('Storage/'.$v->picurl) }}" width="50" height="50"/></td>
+                    <td><img src="{{ asset('storage/'.$v->picurl) }}" width="50" height="50"/></td>
                     <td>{{ $v->academic }}</td>
                     <td>{{ $v->administration }}</td>
                     <td>{{ $v->orderid }}</td>

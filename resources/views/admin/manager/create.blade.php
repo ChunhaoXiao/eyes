@@ -13,7 +13,7 @@
             <div class="col-sm-auto d-flex">
               @foreach(App\Models\Manager::AVATARS as $k=> $v)
                 <div class="custom-control custom-radio image-checkbox">
-                  <input type="radio" class="custom-control-input" id="ck2a{{$k}}" name="avatar" value="{{$k+1}}" {{isset($data->avatar) && $data->avatar == $k ? 'checked': ''}}>
+                  <input type="radio" class="custom-control-input" id="ck2a{{$k}}" name="avatar" value="{{$k+1}}" {{isset($data->avatar) && $data->avatar == $k+1 ? 'checked': ''}}>
                   <label class="custom-control-label" for="ck2a{{$k}}">
                     <img src="{{asset('images/avatars/'.$v)}}" alt="" class="img-thumbnail rounded" width="100" height="100">
                   </label>

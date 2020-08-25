@@ -12,6 +12,7 @@
       <form action="" id="comment_form">
       <x-textarea text="医生备注" rows=10 name="c_comments"/>
        <x-textinput text="日期" type="date" name="c_date"/>
+       <input type="hidden" name="id">
       </form>
 
         
@@ -31,13 +32,13 @@
   $("#comments").on('click', function() {
     
     const data = $("#comment_form").serialize()
-    
+    const id = $("input[name=id]").val();
 
     $.ajax({
       
-      url:"{{ route('user.comments.store', $user) }}",
+      url:id? "/admin/comments/"+id : "{{ route('user.comments.store', $user) }}",
       data:data,
-      type:'post',
+      type:id? 'put' : 'post',
       success:res => {
        // console.log(res)
         $("#error").removeClass('text-danger').addClass('text-success').html('添加成功');

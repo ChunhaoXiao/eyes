@@ -1,13 +1,16 @@
-<h3>交片记录</h3>
+
+<x-section-title title="交片记录"/>
 <div class="container">
     <div class="row">
         <div class="col-sm"><x-textinput  text="日期" type="date" name="jpjl_date" :value="$data->jpjl_date??''"/></div>
         <div class="col-sm"><x-textinput  text="交片人" name="jpjl_jpr" :value="$data->jpjl_jpr??''"/></div>
-        <div class="col-sm"><x-textinput  text="收片人" name="jpjl_spr" :value="$data->jpjl_spr??''"/></div>
+        <div class="col-sm"><x-textinput  text="收片人" name="jpjl_spr" :value="$data->jpjl_spr??$user->name??''"/></div>
     </div>
     @foreach(App\Models\Aplastic::QUESTIONS as $k => $v)
-        <div class="row">
-            <x-radio col="col-sm-6" :text="$v" :name="$k" :options="[1 => '是', 2 => '否']" :checked="$data->$k??1"/>
+        <div class="row no-gutters">
+            <div class="col-sm">
+                <x-radio col="col-sm-auto" :text="$v" :name="$k" :options="[1 => '是', 2 => '否']" :checked="$data->$k??1" col="3"/>
+            </div>
         </div>
     @endforeach
 

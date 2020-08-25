@@ -10,6 +10,14 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
+    public function before(Manager $manager, $pos)
+    {
+        if($manager->role->id == 1)
+        {
+            return true;
+        }
+            
+    }
     /**
      * Determine whether the user can view any categories.
      *
@@ -31,7 +39,8 @@ class CategoryPolicy
      */
     public function view(Manager $manager, $type)
     {
-       
+        $action = $type.'/category-index';
+        return $manager->role->actions->contains('action', $action);
     }
 
     /**
@@ -42,7 +51,7 @@ class CategoryPolicy
      */
     public function create(Manager $manager, $type)
     {
-        $action = $type.'/category-create';
+        $action = $type.'/category-store';
         return $manager->role->actions->contains('action', $action);
     }
 
@@ -53,9 +62,10 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function update(User $user, Category $category)
+    public function update(Manager $manager, $type)
     {
-        //
+        $action = $type.'/category-update';
+        return $manager->role->actions->contains('action', $action);
     }
 
     /**
@@ -65,9 +75,10 @@ class CategoryPolicy
      * @param  \App\Category  $category
      * @return mixed
      */
-    public function delete(User $user, Category $category)
+    public function delete(Manager $manager, $type)
     {
-        //
+        $action = $type.'/category-delete';
+        return $manager->role->actions->contains('action', $action);
     }
 
     /**

@@ -11,4 +11,12 @@ class ShopArea extends Model
     const UPDATED_AT = 'update_time';
     protected $dateFormat = 'U';
     protected $guarded = [];
+
+    public function shops() {
+    	return $this->hasMany(Shop::class, 'regionid');
+    }
+
+    public function doctors() {
+    	return $this->hasManyThrough(Doctor::class, Shop::class, 'regionid', 'shopid');
+    }
 }

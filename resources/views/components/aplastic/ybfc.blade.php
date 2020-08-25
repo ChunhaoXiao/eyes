@@ -1,4 +1,4 @@
-<h3>眼部复查</h3>
+<x-section-title title="眼部复查"/>
 <div class="container">
     @foreach(App\Models\Aplastic::FUCHA as $k => $v)
     <div class="row">

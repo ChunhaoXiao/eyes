@@ -30,7 +30,7 @@
         </span>
     </div>    
     <div class="app-header__content">
-        <div class="app-header-left">
+        <!-- <div class="app-header-left">
             <div class="search-wrapper">
                 <div class="input-holder">
                     <input type="text" class="search-input" placeholder="Type to search">
@@ -39,84 +39,82 @@
                 <button class="close"></button>
             </div>
             <ul class="header-menu nav">
-                <!--<li class="nav-item">-->
-                <!--    <a href="javascript:void(0);" class="nav-link">-->
-                <!--        <i class="nav-link-icon fa fa-database"> </i>-->
-                <!--        Statistics-->
-                <!--    </a>-->
-                <!--</li>-->
-                <!--<li class="btn-group nav-item">-->
-                <!--    <a href="javascript:void(0);" class="nav-link">-->
-                <!--        <i class="nav-link-icon fa fa-edit"></i>-->
-                <!--        Projects-->
-                <!--    </a>-->
-                <!--</li>-->
-                <!--<li class="dropdown nav-item">-->
-                <!--    <a href="javascript:void(0);" class="nav-link">-->
-                <!--        <i class="nav-link-icon fa fa-cog"></i>-->
-                <!--        Settings-->
-                <!--    </a>-->
-                <!--</li>-->
-            </ul>        </div>
-            
-            
-            
-            
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="nav-link-icon fa fa-database"> </i>
+                        Statistics
+                    </a>
+                </li>
+                <li class="btn-group nav-item">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="nav-link-icon fa fa-edit"></i>
+                        Projects
+                    </a>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="javascript:void(0);" class="nav-link">
+                        <i class="nav-link-icon fa fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+            </ul>        
+        </div> -->
 
-            
-            
         <div class="app-header-right">
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper">
                         <div class="widget-content-left">
                             <div class="btn-group">
-                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="{{asset('images/cat.jpg')}}" alt="">
+
+                                <a data-toggle="dropdown" id="drop_menu" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                    <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                    <!--<button type="button" tabindex="0" class="dropdown-item">User Account</button>-->
-                                    <!--<button type="button" tabindex="0" class="dropdown-item">Settings</button>-->
-                                    <!--<h6 tabindex="-1" class="dropdown-header">Header</h6>-->
-                                    <!--<button type="button" tabindex="0" class="dropdown-item">Actions</button>-->
-                                    <!--<div tabindex="-1" class="dropdown-divider"></div>-->
-                                    <!--<button type="button" tabindex="0" class="dropdown-item">Dividers</button>-->
-                                    <a class="dropdown-item" href="#">修改密码</a>
-                                     <a class="dropdown-item" href="javascript:;" id="logout">退出</a>
+                                    <a href="{{route('password.edit')}}" type="button" tabindex="0" class="dropdown-item">修改密码</a>
+                                    <button class="dropdown-item" id="logout">退出</button>
+                                    <!-- <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                    <h6 tabindex="-1" class="dropdown-header">Header</h6>
+                                    <button type="button" tabindex="0" class="dropdown-item">Actions</button>
+                                    <div tabindex="-1" class="dropdown-divider"></div>
+                                    <button type="button" tabindex="0" class="dropdown-item">Dividers</button> -->
                                 </div>
                             </div>
 
                         </div>
-                        <!--<div class="widget-content-left  ml-3 header-user-info">-->
-                        <!--    <div class="widget-heading">-->
-                        <!--        Alina Mclourd-->
-                        <!--    </div>-->
-                        <!--    <div class="widget-subheading">-->
-                        <!--        VP People Manager-->
-                        <!--    </div>-->
-                        <!--</div>-->
+                        <div class="widget-content-left  ml-3 header-user-info">
+                            <div class="widget-heading">
+                                {{Auth::user()->username}}
+                            </div>
+                            <div class="widget-subheading">
+                                {{ Auth::user()->role->title??'创始人' }}
+                            </div>
+                        </div>
                         <div class="widget-content-right header-user-info ml-3">
-                            <!--<button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">-->
-                            <!--    <i class="fa text-white fa-calendar pr-1 pl-1"></i>-->
-                            <!--</button>-->
+                            <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                                <i class="fa text-white fa-calendar pr-1 pl-1"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>       </div>
     </div>
 </div>
-<script>
 
-    $("a[data-toggle=dropdown]").dropdown()
-    
-    $("#logout").on('click', function() {
-        $.ajax({
-            type:'post',
-            url:"{{ route('admin.logout')}}",
-            success: res => {
-                location.reload();
-            }
+<script>
+    $(function(){
+        $("#drop_menu").dropdown();
+
+        $("#logout").click(function(e){
+            $.ajax({
+                url:"{{ route('admin.logout') }}",
+                type:'post',
+                success:res => {
+                    location.reload();
+                }
+            })
         })
     })
+    
 </script>

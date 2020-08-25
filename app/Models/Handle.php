@@ -31,6 +31,7 @@ class Handle extends Model
     }
 
     public function getEyeLeftAttribute() {
+       // dump(Category::whereIn('id', $this->left_eye??[])->get());
         return Category::whereIn('id', $this->left_eye??[])->get()->implode('name', '、');
     }
 

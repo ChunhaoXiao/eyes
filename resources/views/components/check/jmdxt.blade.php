@@ -1,4 +1,5 @@
-<h3>角膜地形图</h3>
+<x-section-title title="角膜地形图"/>
+
 <div class="container">
     <div class="row">
         <label for="" class="col-sm-auto col-form-label">

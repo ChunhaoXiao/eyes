@@ -152,6 +152,10 @@ class Aplastic extends Model
         return implode('、', array_intersect_key(SELF::ZHUSU, $checked));
     }
 
+    public function customer() {
+        return $this->belongsTo(Customer::class, 'user_id');
+    }
+
     // public function getZhusuAttribute() {
     //     $arr = [];
     //     $datas = SELF::ZHUSU;

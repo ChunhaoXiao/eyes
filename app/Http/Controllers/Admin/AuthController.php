@@ -21,9 +21,9 @@ class AuthController extends Controller
         }
         return back();
     }
-    
+
     public function destroy() {
         Auth::logout();
-        return redirect('/');
+        return response()->json(['status' => 0]);
     }
 }

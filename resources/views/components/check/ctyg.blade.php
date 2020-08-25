@@ -1,4 +1,5 @@
-<h3>常瞳眼光</h3>
+<x-section-title title="常瞳验光"/>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-auto col-form-label"><b>插片度数</b></div>

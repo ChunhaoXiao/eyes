@@ -10,6 +10,10 @@ use App\Http\Requests\AppointmentRequest;
 
 class AppointmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Appointment::class);
+    }
     /**
      * Display a listing of the resource.
      *

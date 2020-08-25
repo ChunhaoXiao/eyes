@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('content')
-    <x-customer-nav/>
+    <x-customer-nav :user="$user??''"/>
     @yield('form')
     @yield('other')
 

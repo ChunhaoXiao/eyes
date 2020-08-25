@@ -9,6 +9,10 @@ use App\Http\Requests\ManagerSaveRequest;
 
 class ManagerController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Manager::class, 'manager');
+    }
     /**
      * Display a listing of the resource.
      *

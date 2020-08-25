@@ -12,7 +12,11 @@ class Shop extends Model
     protected $dateFormat = 'U';
 
     public function customers() {
-        return $this->hasMany(Customer::class, 'shop');
+        return $this->hasMany(Customer::class, 'shopid');
+    }
+
+    public function doctors() {
+        return $this->hasMany(Doctor::class, 'shopid');
     }
 
     protected $fillable = [
@@ -28,4 +32,8 @@ class Shop extends Model
         'orderid',
         'content',
     ];
+
+    public function scopeIndex($query) {
+        return $query->where([['status', 1], ['indexstatus', 1]])->oldest('orderid')->limit(10);
+    }
 }

@@ -1,0 +1,1 @@
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcdfd53042952eec0&redirect_uri=http://eye.zhaoxunta.com&response_type=code&scope=snsapi_base&state=123#wechat_redirect

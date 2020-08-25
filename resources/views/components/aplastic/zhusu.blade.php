@@ -1,4 +1,4 @@
-<h3>用户主诉</h3>
+<x-section-title title="用户主诉"/>
 <div class="container">
    
     

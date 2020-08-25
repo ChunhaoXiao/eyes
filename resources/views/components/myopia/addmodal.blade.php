@@ -10,7 +10,7 @@
       <div class="modal-body">
       
       <form action="" id="myopia_form">
-        <p class="font-weight-bold">卡项</p>
+        <p class="font-weight-bold pb-2">卡项</p>
         <x-textinput text="次数" name="kx_count"/>
         <x-textinput text="金额" name="kx_amount"/>
 
@@ -18,12 +18,12 @@
 
         <x-textinput text="结束日期" type="date" name="kx_date_end"/>
         <x-textinput text="金额" name="kx_amount_1"/>
-        <p class="font-weight-bold">种类</p>
+        <p class="font-weight-bold pb-2">种类</p>
         <x-textinput text="中医经络点穴" name="kx_zyjldx"/>
         <x-textinput text="仪器训练" name="kx_yqxl" />
         <x-textinput text="治疗方案" name="kx_zlfa" />
         <x-textinput text="医师" name="kx_doctor"/>
-       
+       <input type="hidden" name="id"/>
       </form>
 
         
@@ -43,13 +43,14 @@
   $("#myopia").on('click', function() {
     
     const data = $("#myopia_form").serialize()
-    
+    const id = $("input[name=id]").val();
+    const table = "{{$table}}"
 
     $.ajax({
       
-      url:"{{ route('user.myopias.store', ['user' => $user, 'table' => $table]) }}",
+      url:id? "/admin/myopias/"+id+"?table="+table : "{{ route('user.myopias.store', ['user' => $user, 'table' => $table]) }}",
       data:data,
-      type:'post',
+      type:id? 'put':'post',
       success:res => {
        // console.log(res)
         $("#error").removeClass('text-danger').addClass('text-success').html('添加成功');

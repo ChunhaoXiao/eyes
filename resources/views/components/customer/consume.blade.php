@@ -51,11 +51,13 @@
 
  <script type="module">
   $("a[data-type=consume]").on('click', function(e) {
+    const  date = "{{now()->toDateString()}}"
+    const shopid = "{{$user->shopid}}";  
     $("#add_consume").modal()
     $("input[name=id]").val(0)
-    $("input[name=apptime]").val("");
+    $("input[name=apptime]").val(date);
     $("input[name=price]").val("")
-    $("#shopids").val("").select2()
+    $("#shopids").val(shopid).select2()
 
     $("#consumption_type_id").val("").select2()
     $("#product_type_id").val("").select2()

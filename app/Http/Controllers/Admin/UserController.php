@@ -24,6 +24,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', Customer::class);
         $datas = $request->all();
         $search = new SearchService($datas);
 

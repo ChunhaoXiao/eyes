@@ -6,7 +6,7 @@
         <div class="row form-group">
             <label for="" class="col-sm-1">图片</label>
             <div class="col-sm">
-            <x-uploadfile id="shoppicture" picname="picurl"  :uploadUrl="route('admin.upload')" title="上传图片" textname="shopimg" />
+            <x-uploadfile id="shoppicture" field="picurl"  :uploadUrl="route('admin.upload')" title="上传图片" textname="shopimg" :pictures="$data->picurl??''" singlepic="1"/>
             </div>
         </div>
         <x-select label="所属分店" labelcol=1 name="shopid" id="shop" source="shop" :selected="$data->shopid??''"/>

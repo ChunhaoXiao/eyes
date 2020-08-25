@@ -13,6 +13,7 @@
        <x-textinput text="日期" type="date" name="r_date"/>
        <x-textinput text="复查人" name="r_user" />
        <x-textarea text="复查信息" rows=10 name="r_info"/>
+       <input type="hidden" name="id">
        
       </form>
 
@@ -31,15 +32,15 @@
 <script type="module">
 
   $("#myopia").on('click', function() {
-    
     const data = $("#record_form").serialize()
+    const id = $("input[name=id]").val();
     
-
     $.ajax({
       
-      url:"{{ route('user.records.store', $user) }}",
+      url:id? "/admin/records/"+id :"{{ route('user.records.store', $user) }}",
       data:data,
-      type:'post',
+      type:id ? 'put' : 'post',
+
       success:res => {
        // console.log(res)
         $("#error").removeClass('text-danger').addClass('text-success').html('添加成功');
@@ -48,8 +49,8 @@
           location.reload()
         }, 800)
       },
+
       error:res => {
-       
         const errors = res.responseJSON.errors
         const v = Object.values(errors)[0][0]
         $("#error").html(v)

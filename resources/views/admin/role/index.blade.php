@@ -20,7 +20,7 @@
                     <td>{{ $v->status == 1 ? '正常' : '禁用'}}</td>
                     <td>
                         <a class="pe-7s-note btn mr-2" href="{{route('roles.edit', $v)}}" style="font-size:20px"></a>
-                        <a class="pe-7s-trash btn" href="#" style="font-size: 20px"></a>
+                        <a class="pe-7s-trash btn" href="javascript:;" style="font-size: 20px" data-url="{{route('roles.destroy', $v)}}"></a>
                     </td>
                 </tr>
             @endforeach

@@ -11,7 +11,7 @@
       <div class="modal-body">
         <form action="" id="consume_form">
            
-            <x-formtext  text="消费时间" name="apptime" type="date"/>
+            <x-formtext  text="消费时间" name="apptime" type="date" />
             <x-formtext text="消费金额" name="price" type="number"/>
             
             <x-select labelcol="2" name="shopid" id="shopids" label="医院" source="shop" style="width: 200px;"/>

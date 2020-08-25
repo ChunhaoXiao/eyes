@@ -9,6 +9,10 @@ use App\Http\Requests\ShopAreaRequest;
 
 class ShopAreaController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(ShopArea::class, 'area');
+    }
     /**
      * Display a listing of the resource.
      *

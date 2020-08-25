@@ -36,10 +36,10 @@
             目前眼镜度数
         </label>
         <div class="col-sm">
-        <x-inline-input label="右眼" name="right_eye" type="number" :value="$data->right_eye??''"/>
+        <x-inline-input label="右眼" name="right_eye" type="number" step="0.01" :value="$data->right_eye??''"/>
         </div>
         <div class="col-sm">
-        <x-inline-input label="左眼" name="left_eye" type="number" :value="$data->left_eye??''"/>
+        <x-inline-input label="左眼" name="left_eye" type="number" step="0.01" :value="$data->left_eye??''"/>
         </div>
     </div>
     <x-formtext text="最近一次配镜时间" name="pjsj" type="date" :value="$data->pjsj??''" labelcol="2"/>

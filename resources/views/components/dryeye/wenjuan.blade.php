@@ -1,4 +1,4 @@
-<h3>问卷调查</h3>
+<x-section-title title="问卷调查" />
 <div class="container">
     @foreach(App\Models\Dryeye::QUESTIONS as $k => $v)
         <div class="row mb-2">

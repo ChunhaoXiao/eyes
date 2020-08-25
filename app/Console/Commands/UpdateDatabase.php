@@ -11,7 +11,8 @@ use App\Models\Customer;
 use App\Models\Aplastic;
 use App\Models\Myopia;
 use App\Models\Comment;
-
+use App\Models\AplasticData;
+use App\Models\Handle;
 class UpdateDatabase extends Command
 {
     /**
@@ -189,31 +190,58 @@ class UpdateDatabase extends Command
         //     }
         // });
 
-            Myopia::chunk(200, function($datas) {
+            // Myopia::chunk(200, function($datas) {
                 
-                foreach($datas as $v) {
-                    // if($v->kx_date_end) {
-                    //     if(!$this->isValidDate($v->kx_date_end)) {
-                    //         echo 'invalid date';
+            //     foreach($datas as $v) {
+            //         // if($v->kx_date_end) {
+            //         //     if(!$this->isValidDate($v->kx_date_end)) {
+            //         //         echo 'invalid date';
                             
-                    //     }
-                    // }
-                    if($v->kx_date_end=='0000-00-00') {
-                        //echo $v->kx_date_end."\r\n";
-                        $v->update(['kx_date_end' => NUll]);
-                    }
+            //         //     }
+            //         // }
+            //         if($v->kx_date_end=='0000-00-00') {
+            //             //echo $v->kx_date_end."\r\n";
+            //             $v->update(['kx_date_end' => NUll]);
+            //         }
 
-                    if($v->kx_date_start == '0000-00-00') {
-                        $v->update(['kx_date_start' => NULL]);
+            //         if($v->kx_date_start == '0000-00-00') {
+            //             $v->update(['kx_date_start' => NULL]);
+            //         }
+            //     }
+            // });
+
+            // Comment::chunk(200, function($datas) {
+            //     foreach($datas as $v) {
+            //         if($v->c_date == '0000-00-00') {
+            //             $v->update(['c_date' => NULL]);
+            //         }
+            //     }
+            // });
+
+           
+            DB::table("ya_aplastic_data")->orderBy('id')->chunk(200, function($datas){
+                foreach($datas as $v) {
+                    if($v->add_date == '0000-00-00') {
+                        DB::table('ya_aplastic_data')->where('id', $v->id)->update(['add_date' => NULL]);
                     }
+                    
                 }
             });
 
-            Comment::chunk(200, function($datas) {
+            Handle::orderBy('id')->chunk(100, function($datas) {
                 foreach($datas as $v) {
-                    if($v->c_date == '0000-00-00') {
-                        $v->update(['c_date' => NULL]);
+                    $l = $v->left_eye;
+                    if(is_array($l) && count($l) == 1 && strpos($l[0],',')) {
+                        $datal = explode(',', $l[0]);
+                        $v->update(['left_eye' => $datal]);
                     }
+
+                    $r = $v->right_eye;
+                    if(is_array($r) && count($r) == 1 && strpos($r[0],',')) {
+                        $datar = explode(',', $r[0]);
+                        $v->update(['right_eye' => $datar]);
+                    }
+
                 }
             });
         

@@ -37,7 +37,7 @@ class CustomerRecordController extends Controller
      */
     public function store(Request $request, Customer $user)
     {
-        $user->records()->create($request->input());
+        $user->records()->create($request->except('id'));
     }
 
     /**
@@ -48,7 +48,7 @@ class CustomerRecordController extends Controller
      */
     public function show($id)
     {
-        //
+        return Record::find($id);
     }
 
     /**
@@ -71,7 +71,9 @@ class CustomerRecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $datas = $request->except('id');
+        $row = Record::find($id)->update($datas);
+        return response()->json(['status' => 0]);
     }
 
     /**

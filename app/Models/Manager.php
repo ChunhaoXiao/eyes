@@ -32,7 +32,7 @@ class Manager extends Authenticatable
                 $query = $query->where($k, $v);
             }
         }
-        return $query;
+        return $query->where('is_founder', 0);
     }
 
     public function role() {

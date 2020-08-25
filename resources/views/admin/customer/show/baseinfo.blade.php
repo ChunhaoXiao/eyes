@@ -28,7 +28,7 @@
 <!--回访记录-->
 <x-customer.call-back :data="$user->callbacks()->latest()->take(4)->get()->reverse()"/>
 <!--消费记录-->  
-<x-customer.consume :data="$user->consumes()->with(['shop','consume_type', 'product'])->latest()->take(10)->get()"/>
+<x-customer.consume :data="$user->consumes()->with(['shop','consume_type', 'product'])->latest()->take(10)->get()" :user="$user"/>
 @endsection
 <x-customer.callmodal :user="$user"/>
 <x-customer.consume-modal :user="$user" />

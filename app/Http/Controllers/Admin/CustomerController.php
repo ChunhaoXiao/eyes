@@ -9,6 +9,10 @@ use App\Http\Requests\CustomerSaveRequest;
 
 class CustomerController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Customer::class);
+    }
+
     public function create() {
         return view('admin.customer.create');
     }
@@ -16,7 +20,6 @@ class CustomerController extends Controller
     public function show(Customer $customer, $section = 'baseinfo')
     {
         $section = in_array($section, array_keys(Customer::NAV))? $section : 'baseinfo';
-       // dd($customer->$section);
         return view('admin.customer.show.'.$section, ['user' => $customer, 'section' => $section]);
     }
 

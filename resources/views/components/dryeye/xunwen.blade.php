@@ -1,6 +1,6 @@
-<h3>病史询问</h3>
+<x-section-title title="疾病询问" />
 <div class="container">
-    <x-textinput text="主诉" name="suit" :value="$data->suit??''"/>
-    <x-textinput text="既往史" name="passed" :value="$data->passed??''"/>
-    <x-textinput text="家族史" name="family" :value="$data->family??''"/>
+    <x-formtext labelcol="1" text="主诉" name="suit" :value="$data->suit??''"/>
+    <x-formtext labelcol="1" text="既往史" name="passed" :value="$data->passed??''"/>
+    <x-formtext labelcol="1" text="家族史" name="family" :value="$data->family??''"/>
 </div>

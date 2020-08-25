@@ -21,19 +21,23 @@
                 <x-textinput text="订片人" name="receiver"/>
               </div>
             </div>
+            <div class="pl-3 pb-2">
+              <x-radio text="订单方式" :options="['1' => '电邮', '2' => '传真']" name="send_method"/>
+            </div>
+           
             
-            <x-radio text="订单方式" :options="['1' => '电邮', '2' => '传真']" name="send_method"/>
+            <x-select label="品牌" name="brand_id" source="corneal" id="jingpian" style="width:150px" labelcol="2"/>
 
-            <x-select label="品牌" name="brand_id" source="corneal" id="jingpian" style="width:150px"/>
-            <p class="font-weight-bold">订片参数：</p>
+            <p class="font-weight-bold pb-2">订片参数：</p>
 
             @foreach(App\Models\AplasticData::ORDERFIELDS as $k => $v)
-            <div class="row">
-                <label for="" class="col-sm-auto col-form-label">{{$v}}</label>
+            <div class="row no-gutters">
+                <label for="" class="col-sm-2 col-form-label">{{$v}}</label>
                 <div class="col-sm"><x-textinput text="右" :name="$k.'_r'"/></div>
                 <div class="col-sm"><x-textinput text="左" :name="$k.'_l'"/></div>
             </div>
             @endforeach
+            <input type="hidden" name="id">
 
             <!--  -->
         </form>
@@ -56,12 +60,13 @@
     
     const data = $("#prescribe_form").serialize()
     
-
+    let id = $("input[name=id]").val();
+    
     $.ajax({
       
-      url:"{{ route('user.aplasticdata.store', $user) }}",
+      url:id? "/admin/aplasticdata/"+id : "{{ route('user.aplasticdata.store', $user) }}",
       data:data,
-      type:'post',
+      type:id? 'put' : 'post',
       success:res => {
         console.log(res)
         $("#error").removeClass('text-danger').addClass('text-success').html('添加成功');

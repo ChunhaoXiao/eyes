@@ -9,6 +9,10 @@ use App\Http\Requests\ShopRequest;
 
 class ShopController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Shop::class, 'shop');
+    }
     /**
      * Display a listing of the resource.
      *
